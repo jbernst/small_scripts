@@ -1,0 +1,87 @@
+===================
+| Tips and Tricks |
+===================
+
+1. root, home, pwd, cp, mv, ls, flags, tabs/autofill, cd, 
+
+- pwd & cd --> You are always in the present working directory unless specified otherwise
+	- chain your cd commands using .. and . and /
+	- pwd will list the present working directory
+	- tabs/ auto filling makes this easier (note file extensions are not assumed!)
+
+- up and down keys
+	- let you sort through previous lines of code and rerun
+
+- root and home --> now that you can move around, excplore root (/) and home directories, as well as your 'bin' and '$PATH'
+	- your path is where your computer automatically searches for commands and other such files. You can add to your bin amd $PATH, but keep weary about this.
+
+- ls --> list files using a variety of flags (or none)
+
+- mv and cp --> move (mv) and copy (cp) are excellent tools for file manipulation and really fast speeds
+	- The wildcard (*) can make this even easier, but use it with caution
+
+- never touch your bashrc file unless you know what you are doing
+#	- nano ~/.bashrc 
+	- this file (sometimes called bash_profile in Macs) is the 'instruction manual' to your computer. 
+	- You can do neat things in it but best to leave it alone until you really know what you are doing.
+	- Your copmuter will source ~/.bashrc upon startup 
+		
+
+======================================================================================================================================================================================
+
+2. SLURM
+
+- all runs must be done through SLURM (unless you are moving files, copying files, etc). 
+- you can run a preliminary run just to make sure a script starts, but otherwise you need to respect login nodes(your command interface for Amarel) vs computer nodes (where jobs are submitted)
+
+	- Preliminary runs: sacct --format=JobID,JobName,NTasks,NNodes,NCPUS,MaxRSS,AveRSS,AveCPU,Elapsed,ExitCode -j $SLURM_JOBID
+
+
+3. Checking nodes sinfo --Node --format="%n %f %c. Nodes are split into nonepre vs main. Main nodes are free to use, but your job can be kicked off by someone with higher priority (like an owner). Nonpre nodes you are safe from this, but they are less powerful.
+	- sinfo -p nonpre --> see the available nonpre nodes
+	- sinfo -p main   --> see the available main nodes
+	- Node List: https://sites.google.com/view/cluster-user-guide/amarel#h.kyrykrouyxxz
+
+
+======================================================================================================================================================================================
+
+4. nano or vim (vim has a steeper learning curve)
+	- These are text editors. Very helpful to use and make notes.
+	- For nano
+		- Your typical keyboard shortcuts do not work here!!!!!!!!! Remember this. E.g., Ctrl+K = cut text
+		- Ctrl+O = save (it will ask you to give the file name. By default it is the same, so if you leave this and hit enter, it overwrites the current file).
+		- Ctrl+C = Cursor position
+		- Ctrl+W = Search ('where is?')
+		- Ctrl+X = Exit
+	- use carrots > to write out a file to text (>> to overwrite a preexisting file)
+	- If you don't know about stdout and stderr files, read up on them here: https://www.howtogeek.com/435903/what-are-stdin-stdout-and-stderr-on-linux/
+
+5. grep, history
+	- Possibly the most useful command, in addition to 'sed'. Grep (Global regular expression print) will 'grab' a string of text from a file
+	- e.g., 'grep mormoops alignment.txt' will find the instances of mormoops in the file alignment.txt, giving each line
+	- some arguements
+		-c : This prints only a count of the lines that match a pattern
+		-h : Display the matched lines, but do not display the filenames.
+		-i : Ignores, case for matching
+		-l : Displays list of a filenames only.
+		-n : Display the matched lines and their line numbers.
+		-v : This prints out all the lines that do not matches the pattern
+		-e exp : Specifies expression with this option. Can use multiple times.
+		-f file : Takes patterns from file, one per line.
+		-E : Treats pattern as an extended regular expression (ERE)
+		-w : Match whole word
+		-o : Print only the matched parts of a matching line, with each such part on a separate output line.
+
+6. Head and tail
+	- obtain the first (head) or last (tail) 10 lines of a file
+	- can use -n # arguement to change the number of lines
+	- good for large files
+
+7. sed: stream editor
+	- find and replace within files to change the text 
+	- sed 's/unix/linux/2' something.txt
+
+
+8. rsync
+	- file transfer across servers
+	- rsync -a [file] jmb689@amarel.rutgers.edu:/scratch/jmb689/cerberus_UCEs
