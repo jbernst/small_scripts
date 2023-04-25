@@ -12,7 +12,7 @@ Data
 &nbsp;&nbsp;&nbsp;&nbsp;Rawdata.txt
 
 To learn how to navigate the terminal, as well as try some helpful commands for listing and manipulating files, check the following list of commands:
-  >[https://github.com/jbernst/small_scripts/blob/main/tutorial.txt](https://github.com/jbernst/small_scripts/blob/main/tutorial.txt)
+  >[https://github.com/jbernst/small_scripts/blob/main/tutorial.txt](https://github.com/jbernst/small_scripts/blob/main/tutorial.txt). This file contains information on ```cd```, ```mv```, ```ls```, ```cp```, ```pwd```, ```nano```, ```grep```, ```history```, ```head```, ```tail```, ```sed```, and ```rsync``` commands, as well as some SLURM commands.
 
 ## Touching Files
 Sometimes we need to update the date and time of our files. For example, if a computer cluster has a 90-day limit on files, in which files >90 days will be purged, you can use the command ```touch``` to update the files. For a short script on updating all files recursively from within a directory, check here:
